@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{faa93fc8-4a56-4b96-b970-753d289b36e7}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql150DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -65,5 +65,13 @@
     <Build Include="dbo\StoredProcedures\spUser_GetAll.sql" />
     <Build Include="dbo\StoredProcedures\spUser_Get.sql" />
     <Build Include="dbo\StoredProcedures\spUser_Delete.sql" />
+    <Build Include="dbo\StoredProcedures\spUser_Insert.sql" />
+    <Build Include="dbo\StoredProcedures\spUser_Update.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="UserDB.publish.xml" />
   </ItemGroup>
 </Project>
