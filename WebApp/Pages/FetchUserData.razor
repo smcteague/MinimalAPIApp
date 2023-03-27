@@ -1,0 +1,49 @@
+﻿@page "/fetchuserdata"
+@inject HttpClient Http
+@using WebApp.Shared
+
+<PageTitle>User Data</PageTitle>
+
+<MudText Typo="Typo.h3" GutterBottom="true">User Data</MudText>
+<MudText Class="mb-8">This component demonstrates fetching data from the minimal API.</MudText>
+
+<MudText Typo="Typo.h3" GutterBottom="true">Users</MudText>
+<MudText Class="mb-8">This component demonstrates fetching data from a minimal API.</MudText>
+@if (UsersList == null)
+{
+    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+}
+else
+{
+    <MudTable Items="UsersList" Hover="true" SortLabel="Sort By" Elevation="0">
+        <HeaderContent>
+            <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Models.UserModel, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Models.UserModel, object>(x=>x.FirstName)">First Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Models.UserModel, object>(x=>x.LastName)">Last Name</MudTableSortLabel></MudTh>
+
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Id">@context.Id</MudTd>
+            <MudTd DataLabel="First Name">@context.FirstName</MudTd>
+            <MudTd DataLabel="Last Name">@context.LastName</MudTd>
+
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[]{50, 100}" />
+        </PagerContent>
+    </MudTable>
+}
+
+
+@code {
+
+    private List<Models.UserModel> UsersList { get; set; } = new List<Models.UserModel>();
+
+    protected async override Task OnInitializedAsync()
+    {
+        var httpClient = new HttpClient();
+        UsersList = await httpClient.GetFromJsonAsync<List<Models.UserModel>>("https://localhost:7040/users");
+
+        base.OnInitialized();
+    }
+}
