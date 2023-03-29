@@ -1,6 +1,4 @@
-﻿@inherits FetchUserDataBase;
-@page "/fetchuserdata"
-@inject HttpClient Http
+﻿@page "/fetchuserdata"
 @using WebApp.Shared
 
 <PageTitle>User Data</PageTitle>
@@ -10,17 +8,17 @@
 
 <MudText Typo="Typo.h3" GutterBottom="true">Users</MudText>
 <MudText Class="mb-8">This component demonstrates fetching data from a minimal API.</MudText>
-@if (UsersList == null)
+@if (Users == null)
 {
     <MudProgressCircular Color="Color.Default" Indeterminate="true" />
 }
 else
 {
-    <MudTable Items="UsersList" Hover="true" SortLabel="Sort By" Elevation="0">
+    <MudTable Items="Users" Hover="true" SortLabel="Sort By" Elevation="0">
         <HeaderContent>
-            <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Models.UserModel, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<Models.UserModel, object>(x=>x.FirstName)">First Name</MudTableSortLabel></MudTh>
-            <MudTh><MudTableSortLabel SortBy="new Func<Models.UserModel, object>(x=>x.LastName)">Last Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Models.User, object>(x=>x.Id)">Id</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Models.User, object>(x=>x.FirstName)">First Name</MudTableSortLabel></MudTh>
+            <MudTh><MudTableSortLabel SortBy="new Func<Models.User, object>(x=>x.LastName)">Last Name</MudTableSortLabel></MudTh>
 
         </HeaderContent>
         <RowTemplate>

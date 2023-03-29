@@ -1,19 +1,20 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Net.Http.Json;
+using WebApp.Models;
+using WebApp.Services;
 
 namespace WebApp.Pages;
 
-public class FetchUserDataBase : ComponentBase
+public partial class FetchUserData
 {
-    protected List<Models.UserModel> UsersList { get; set; } = new List<Models.UserModel>();
+    [Inject]
+    private IUserRepository Repository { get; set; } = null!;
 
-    protected async override Task OnInitializedAsync()
+    public IEnumerable<User> Users { get; private set; } = Enumerable.Empty<User>();
+
+    protected override async Task OnInitializedAsync()
     {
-        var httpClient = new HttpClient();
-        UsersList = await httpClient.GetFromJsonAsync<List<Models.UserModel>>("https://localhost:7040/users");
+        await base.OnInitializedAsync();
 
-        base.OnInitialized();
+        Users = await Repository.GetUsersAsync();
     }
 }
-
-
