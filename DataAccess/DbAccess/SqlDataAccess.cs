@@ -22,7 +22,8 @@ public class SqlDataAccess : ISqlDataAccess
         using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
 
         return await connection.QueryAsync<T>(storedProcedure, parameters,
-            commandType: CommandType.StoredProcedure);
+            commandType: CommandType.Text);
+            //commandType: CommandType.StoredProcedure);
     }
 
     public async Task SaveData<T>(
@@ -33,6 +34,7 @@ public class SqlDataAccess : ISqlDataAccess
         using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
 
         await connection.ExecuteAsync(storedProcedure, parameters,
-            commandType: CommandType.StoredProcedure);
+            commandType: CommandType.Text);
+            //commandType: CommandType.StoredProcedure);
     }
 }
